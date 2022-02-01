@@ -36,3 +36,8 @@ mykernel.iso: mykernel.bin
 run: mykernel.iso
 	(killall qemu-i386 && sleep 1) || true
 	qemu-system-x86_64 -drive format=raw,file=mykernel.iso -m 512m
+
+
+.PHONY: clean
+clean:
+	rm -f $(objects) mykernel.bin mykernel.iso
