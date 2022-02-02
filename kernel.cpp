@@ -84,12 +84,12 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		}
 	} */
 
-	printf("GROS (build [placeholder])\n",0,0);
+	printf("GROS (build [placeholder])\n\n");
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);
 
-	printf("Init hardware Stage 1",0,0);
+	printf("Init hardware Stage 1\n");
 	DriverManager drvManager;
 		MouseDriver mouse(&interrupts);
 		drvManager.AddDriver(&mouse);
@@ -97,10 +97,10 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		KeyboardDriver keyboard(&interrupts);
 		drvManager.AddDriver(&keyboard);
 
-	printf("Init hardware Stage 2",0,0);
+	printf("Init hardware Stage 2\n");
 		drvManager.ActivateAll();
 
-	printf("Init hardware Stage 3",0,0);
+	printf("Init hardware Stage 3\n");
 	interrupts.Activate();
 
 	while(1);

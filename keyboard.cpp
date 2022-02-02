@@ -13,7 +13,7 @@ KeyboardDriver::~KeyboardDriver()
 {
 }
 
-void KeyboardDriver::Activate();
+void KeyboardDriver::Activate()
 {
 	while(commandport.Read() & 0x1)
 		dataport.Read();

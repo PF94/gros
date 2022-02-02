@@ -12,7 +12,7 @@
     {
     }
 
-    void MouseDriver::Activate();
+    void MouseDriver::Activate()
 	{
 		uint16_t* VideoMemory = (uint16_t*)0xb8000;
 		offset = 0;

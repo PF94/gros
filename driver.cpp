@@ -1,20 +1,24 @@
 
 #include "driver.h"
 
-Driver::Driver();
-
-Driver::~Driver();
-
-void Driver::Activate();
+Driver::Driver()
 {
 }
 
-void Driver::Reset();
+Driver::~Driver()
+{
+}
+
+void Driver::Activate()
+{
+}
+
+int Driver::Reset()
 {
 	return 0;
 }
 
-void Driver::Deactivate();
+void Driver::Deactivate()
 {
 }
 
@@ -27,8 +31,8 @@ void DriverManager::AddDriver(Driver* drv)
 	drivers[numDrivers] = drv;
 	numDrivers++;
 }
-void DriveManager::ActivateAll()
+void DriverManager::ActivateAll()
 {
-	for(int 1 = 0; i < numDrivers; i++)
-		driver[i]->Activate();
+	for(int i = 0; i < numDrivers; i++)
+		drivers[i]->Activate();
 }
