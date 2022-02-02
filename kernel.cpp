@@ -3,6 +3,7 @@
 #include "interrupts.h"
 #include "keyboard.h"
 #include "stdio.h"
+#include "bouncy_ball.h"
 
 /**
  * Prints a string of text at (posX, posY)
@@ -72,8 +73,16 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic*/)
 {
-	printf("Hello world from gros!\n");
-	printf("-Gamerappa");
+	for (uint8_t i = 0; i < 79; i++) {
+		for (uint8_t j = 0; j < 25; j++) {
+			printf("#", i, j);
+		}
+	}
+
+	printf("+----------------------+\n",0,0);
+	printf("|Hello world from gros!|\n");
+	printf("| -Gamerappa           |\n");
+	printf("+----------------------+\n");
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);

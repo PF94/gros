@@ -1,5 +1,6 @@
 #include "keyboard.h"
 #include "stdio.h"
+#include "bouncy_ball.h"
 
 KeyboardDriver::KeyboardDriver(InterruptManager* manager)
 : InterruptHandler(manager, 0x21),
@@ -48,6 +49,7 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 		case 0x17: printf("i"); break;
 		case 0x18: printf("o"); break;
 		case 0x19: printf("p"); break;
+		case 0x1A: bouncyBall(); break;
 
 		case 0x1E: printf("a"); break;
 		case 0x1F: printf("s"); break;
@@ -83,8 +85,9 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 			foo[11] = hex[(key >> 4) & 0xF];
 			foo[12] = hex[key & 0xF];
 			printf(foo);
+
 #endif
-			break;
+		break;
 	}
 
 	return esp;
