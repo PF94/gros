@@ -10,16 +10,16 @@
 .macro HandleException num
 .global _ZN16InterruptManager19HandleException\num\()Ev
 _ZN16InterruptManager19HandleException\num\()Ev:
-    movb $\num, (interruptnumber)
-    jmp int_bottom
+	movb $\num, (interruptnumber)
+	jmp int_bottom
 .endm
 
 
 .macro HandleInterruptRequest num
 .global _ZN16InterruptManager26HandleInterruptRequest\num\()Ev
 _ZN16InterruptManager26HandleInterruptRequest\num\()Ev:
-    movb $\num + IRQ_BASE, (interruptnumber)
-    jmp int_bottom
+	movb $\num + IRQ_BASE, (interruptnumber)
+	jmp int_bottom
 .endm
 
 
@@ -64,38 +64,38 @@ HandleInterruptRequest 0x31
 
 int_bottom:
 
-    # register sichern
-    pusha
-    pushl %ds
-    pushl %es
-    pushl %fs
-    pushl %gs
+	# register sichern
+	pusha
+	pushl %ds
+	pushl %es
+	pushl %fs
+	pushl %gs
 
-    # ring 0 segment register laden
-    #cld
-    #mov $0x10, %eax
-    #mov %eax, %eds
-    #mov %eax, %ees
+	# ring 0 segment register laden
+	#cld
+	#mov $0x10, %eax
+	#mov %eax, %eds
+	#mov %eax, %ees
 
-    # C++ Handler aufrufen
-    pushl %esp
-    push (interruptnumber)
-    call _ZN16InterruptManager15HandleInterruptEhj
-    add %esp, 6
-    mov %eax, %esp # den stack wechseln
+	# C++ Handler aufrufen
+	pushl %esp
+	push (interruptnumber)
+	call _ZN16InterruptManager15HandleInterruptEhj
+	add %esp, 6
+	mov %eax, %esp # den stack wechseln
 
-    # register laden
-    pop %gs
-    pop %fs
-    pop %es
-    pop %ds
-    popa
+	# register laden
+	pop %gs
+	pop %fs
+	pop %es
+	pop %ds
+	popa
 
 .global _ZN16InterruptManager15InterruptIgnoreEv
 _ZN16InterruptManager15InterruptIgnoreEv:
 
-    iret
+	iret
 
 
 .data
-    interruptnumber: .byte 0
+	interruptnumber: .byte 0
