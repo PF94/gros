@@ -7,6 +7,14 @@ KeyboardDriver::KeyboardDriver(InterruptManager* manager)
 dataport(0x60),
 commandport(0x64)
 {
+}
+
+KeyboardDriver::~KeyboardDriver()
+{
+}
+
+void KeyboardDriver::Activate();
+{
 	while(commandport.Read() & 0x1)
 		dataport.Read();
 	commandport.Write(0xAE); // activate interrupt shit
@@ -15,12 +23,6 @@ commandport(0x64)
 	dataport.Write(status);
 	dataport.Write(0xF4);
 }
-
-KeyboardDriver::~KeyboardDriver()
-{
-}
-
-void printf(char*);
 
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 {
