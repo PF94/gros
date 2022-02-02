@@ -88,8 +88,8 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);
-	KeyboardDriver keyboard(&interrupts);
 	MouseDriver mouse(&interrupts);
+	KeyboardDriver keyboard(&interrupts);
 	interrupts.Activate();
 
 	while(1);
