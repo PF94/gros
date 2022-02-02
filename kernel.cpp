@@ -19,8 +19,9 @@ void printf(char* str, uint8_t posX, uint8_t posY)
 	static uint8_t x=0, y=0;
 
 	// Only override cursor pos if called from the correct overload.
-	if (posX != 255 && posY != 255)
+	if (posX != 255 && posY != 255) {
 		x = posX; y = posY;
+	}
 
 	for(int i = 0; str[i] != '\0'; ++i)
 	{
