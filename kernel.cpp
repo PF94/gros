@@ -75,6 +75,7 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic*/)
 {
+	// FIXME: Port... the entire C/C++ libraries? FUCK FUCK FUCK FUCK FUCK
 	/*
 	for (uint8_t i = 0; i < 79; i++) {
 		for (uint8_t j = 0; j < 25; j++) {
@@ -82,10 +83,7 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		}
 	} */
 
-	printf("+----------------------+\n",0,0);
-	printf("|Hello world from gros!|\n");
-	printf("| -Gamerappa           |\n");
-	printf("+----------------------+\n");
+	printf("GROS (build [placeholder])\n",0,0);
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);
