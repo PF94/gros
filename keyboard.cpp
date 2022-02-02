@@ -25,6 +25,7 @@ void printf(char*);
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 {
 	uint8_t key = dataport.Read();
+	static bool Shift = false;
 	switch(key)
 	{
 		case 0xFA: break;
@@ -49,6 +50,7 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 		case 0x17: printf("i"); break;
 		case 0x18: printf("o"); break;
 		case 0x19: printf("p"); break;
+		// squarebracket moment
 		case 0x1A: bouncyBall(); break;
 
 		case 0x1E: printf("a"); break;
@@ -74,19 +76,21 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp)
 
 		case 0x1C: printf("\n"); break;
 		case 0x39: printf(" "); break;
+		case 0x2A: case 0x36: Shift = true; break;
+		case 0xAA: case 0xB6: Shift = false; break;
 
 		default:
-#ifdef keyboardcrap
-			// my keyboard has some weird shit going on?
-			// can't figure it out as of now so check this later.
-			// -grkb - February 1st 2022
-			char* foo = "KEYBOARD 0x00";
-			char* hex = "0123456789ABCDEF";
-			foo[11] = hex[(key >> 4) & 0xF];
-			foo[12] = hex[key & 0xF];
-			printf(foo);
-
-#endif
+			if(key < 0x80)
+			{
+				// my keyboard has some weird shit going on?
+				// can't figure it out as of now so check this later.
+				// -grkb - February 1st 2022
+				char* foo = "KEYBOARD 0x00";
+				char* hex = "0123456789ABCDEF";
+				foo[11] = hex[(key >> 4) & 0xF];
+				foo[12] = hex[key & 0xF];
+				printf(foo);
+			}
 		break;
 	}
 
