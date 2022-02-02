@@ -75,11 +75,12 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic*/)
 {
+	/*
 	for (uint8_t i = 0; i < 79; i++) {
 		for (uint8_t j = 0; j < 25; j++) {
 			printf("#", i, j);
 		}
-	}
+	} */
 
 	printf("+----------------------+\n",0,0);
 	printf("|Hello world from gros!|\n");

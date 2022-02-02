@@ -7,7 +7,7 @@ int8_t ballXVel = 1;
 int8_t ballYVel = 1;
 
 void bouncyBall() {
-	printf(" ", ballX, ballY);
+	printf("#", ballX, ballY);
 
 	if (ballX == 0) ballXVel = 1;
 	if (ballY == 0) ballYVel = 1;
