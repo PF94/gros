@@ -4,11 +4,22 @@
 #include "keyboard.h"
 #include "stdio.h"
 
-void printf(char* str)
+/**
+ * Prints a string of text at (posX, posY)
+ *
+ * @param str Text string
+ * @param posX X position of where the text should start.
+ * @param posY Y position of where the text should start.
+ */
+void printf(char* str, uint8_t posX, uint8_t posY)
 {
 	static uint16_t* VideoMemory = (uint16_t*)0xb8000;
 
 	static uint8_t x=0, y=0;
+
+	// Only override cursor pos if called from the correct overload.
+	if (posX != 255 && posY != 255)
+		x = posX; y = posY;
 
 	for(int i = 0; str[i] != '\0'; ++i)
 	{
@@ -39,6 +50,15 @@ void printf(char* str)
 		y = 0;
 		}
 	}
+}
+
+/**
+ * Prints a string of text at the current cursor position.
+ *
+ * @param str Text string
+ */
+void printf(char* str) {
+	printf(str, 255, 255);
 }
 
 typedef void (*constructor)();
