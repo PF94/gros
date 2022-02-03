@@ -105,6 +105,8 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 	printf(" (build ");
 	printf(buildNumber);
 	printf(")\n\n");
+	cpu_string();
+	printf("\n");
 	update_cursor(16,8); // this is a placeholder
 
 	GlobalDescriptorTable gdt;
