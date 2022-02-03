@@ -31,3 +31,4 @@
 *.bin
 
 Doxygen
+*.kate-swp
