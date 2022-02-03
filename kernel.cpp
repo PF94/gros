@@ -95,7 +95,7 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 	} */
 
 	// FIXME: This is ugly code.
-	printf("GROS Vesion ");
+	printf("GROS Version ");
 	printf(majorVersion);
 	printf(".");
 	printf(minorVersion);
