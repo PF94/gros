@@ -1,3 +1,4 @@
+#include "grverp.h"
 #include "types.h"
 #include "gdt.h"
 #include "interrupts.h"
@@ -93,7 +94,14 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		}
 	} */
 
-	printf("GROS (build [placeholder])\n\n");
+	// FIXME: This is ugly code.
+	printf("GROS Vesion ");
+	printf(majorVersion);
+	printf(".");
+	printf(minorVersion);
+	printf(" (build ");
+	printf(buildNumber);
+	printf(")\n\n");
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);
