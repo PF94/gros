@@ -9,12 +9,12 @@
 #include "bouncy_ball.h"
 
 /**
- * Prints a string of text at (posX, posY)
- *
- * @param str Text string
- * @param posX X position of where the text should start.
- * @param posY Y position of where the text should start.
- */
+* Prints a string of text at (posX, posY)
+*
+* @param str Text string
+* @param posX X position of where the text should start.
+* @param posY Y position of where the text should start.
+*/
 void printf(char* str, uint8_t posX, uint8_t posY)
 {
 	static uint16_t* VideoMemory = (uint16_t*)0xb8000;
@@ -58,19 +58,19 @@ void printf(char* str, uint8_t posX, uint8_t posY)
 }
 
 /**
- * Prints a string of text at the current cursor position.
- *
- * @param str Text string
- */
+* Prints a string of text at the current cursor position.
+*
+* @param str Text string
+*/
 void printf(char* str) {
 	printf(str, 255, 255);
 }
 
 /**
- * Prints a string of two hex numbers.
- *
- * @param key Interrupt number(?)
- */
+* Prints a string of two hex numbers.
+*
+* @param key Interrupt number(?)
+*/
 void printfHex(uint8_t key)
 {
 	char* foo = "00";
@@ -81,8 +81,8 @@ void printfHex(uint8_t key)
 }
 
 /**
- * Keyboard shit.
- */
+* Keyboard shit.
+*/
 class PrintfKeyboardEventHandler : public KeyboardEventHandler
 {
 public:
@@ -92,6 +92,49 @@ public:
 		foo[0] = c;
 		printf(foo);
 	}
+};
+
+/**
+* Mouse shit.
+*/
+class MouseToConsole : public MouseEventHandler
+{
+	int8_t x, y;
+public:
+
+	MouseToConsole()
+	{
+	}
+
+	virtual void OnActivate()
+	{
+		uint16_t* VideoMemory = (uint16_t*)0xb8000;
+		x = 40;
+		y = 12;
+		VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0x0F00) << 4
+							| (VideoMemory[80*y+x] & 0xF000) >> 4
+							| (VideoMemory[80*y+x] & 0x00FF);
+	}
+
+	virtual void OnMouseMove(int xoffset, int yoffset)
+	{
+		static uint16_t* VideoMemory = (uint16_t*)0xb8000;
+		VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0x0F00) << 4
+							| (VideoMemory[80*y+x] & 0xF000) >> 4
+							| (VideoMemory[80*y+x] & 0x00FF);
+
+		x += xoffset;
+		if(x >= 80) x = 79;
+		if(x < 0) x = 0;
+		y += yoffset;
+		if(y >= 25) y = 24;
+		if(y < 0) y = 0;
+
+		VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0x0F00) << 4
+							| (VideoMemory[80*y+x] & 0xF000) >> 4
+							| (VideoMemory[80*y+x] & 0x00FF);
+	}
+
 };
 
 typedef void (*constructor)();
@@ -127,7 +170,8 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 
 	printf("Init hardware Stage 1\n");
 	DriverManager drvManager;
-		MouseDriver mouse(&interrupts);
+		MouseToConsole mousehandler;
+		MouseDriver mouse(&interrupts, &mousehandler);
 		drvManager.AddDriver(&mouse);
 
 	PrintfKeyboardEventHandler kbhandler;
