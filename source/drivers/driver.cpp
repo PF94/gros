@@ -1,5 +1,7 @@
 
-#include "driver.h"
+#include <drivers/driver.h>
+using namespace gros::common;
+using namespace gros::drivers;
 
 Driver::Driver()
 {

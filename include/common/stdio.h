@@ -3,9 +3,15 @@
 
 #include "types.h"
 
-// char*? seriously?
-void printf(char*);
-void printf(char*, uint8_t, uint8_t);
-void printfHex(uint8_t);
+namespace gros
+{
+
+	namespace common
+	{
+	void printf(char*);
+	void printf(char*, uint8_t, uint8_t);
+	void printfHex(uint8_t);
+	}
+}
 
 #endif

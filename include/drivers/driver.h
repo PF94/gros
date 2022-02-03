@@ -1,28 +1,33 @@
-#ifndef __DRIVER_H
-#define __DRIVER_H
+#ifndef __GROS__DRIVERS__DRIVER_H
+#define __GROS__DRIVERS__DRIVER_H
 
-	class Driver
+namespace gros
+{
+	namespace drivers
 	{
-	public:
-		Driver();
-		~Driver();
+		class Driver
+		{
+		public:
+			Driver();
+			~Driver();
 
-		virtual void Activate();
-		virtual int Reset();
-		virtual void Deactivate();
-	};
+			virtual void Activate();
+			virtual int Reset();
+			virtual void Deactivate();
+		};
 
-	class DriverManager
-	{
-	private:
-		Driver* drivers[255];
-		int numDrivers;
+		class DriverManager
+		{
+		private:
+			Driver* drivers[255];
+			int numDrivers;
 
-	public:
-		DriverManager();
-		void AddDriver(Driver*);
+		public:
+			DriverManager();
+			void AddDriver(Driver*);
 
-		void ActivateAll();
-	};
-
+			void ActivateAll();
+		};
+	}
+}
 #endif

@@ -1,5 +1,9 @@
 
-#include "mouse.h"
+#include <drivers/mouse.h>
+
+using namespace gros::common;
+using namespace gros::drivers;
+using namespace myos::hardwarecommunication;
 
     MouseEventHandler::MouseEventHandler()
     {

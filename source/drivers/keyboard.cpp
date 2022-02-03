@@ -1,6 +1,10 @@
-#include "keyboard.h"
-#include "stdio.h"
-#include "bouncy_ball.h"
+#include <drivers/keyboard.h>
+#include <comon/stdio.h>
+#include <bouncy_ball.h>
+
+using namespace gros::common;
+using namespace gros::drivers;
+using namespace myos::hardwarecommunication;
 
 KeyboardEventHandler::KeyboardEventHandler()
 {

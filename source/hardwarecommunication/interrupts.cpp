@@ -1,5 +1,5 @@
-#include "interrupts.h"
-#include "stdio.h"
+#include <hardwarecommunication/interrupts.h>
+#include <common/stdio.h>
 
 InterruptHandler::InterruptHandler(InterruptManager* interruptManager, uint8_t InterruptNumber)
 {

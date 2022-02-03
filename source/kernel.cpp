@@ -1,12 +1,17 @@
-#include "grverp.h"
-#include "types.h"
-#include "gdt.h"
-#include "interrupts.h"
-#include "driver.h"
-#include "keyboard.h"
-#include "mouse.h"
-#include "stdio.h"
-#include "bouncy_ball.h"
+#include <grverp.h>
+#include <types.h>
+#include <gdt.h>
+#include <interrupts.h>
+#include <driver.h>
+#include <keyboard.h>
+#include <mouse.h>
+#include <stdio.h>
+#include <bouncy_ball.h>
+
+using namespace gros;
+using namespace gros::common;
+using namespace gros::drivers;
+using namespace gros::hardwarecommunication;
 
 /**
 * Prints a string of text at (posX, posY)

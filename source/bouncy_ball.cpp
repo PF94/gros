@@ -1,5 +1,6 @@
-#include "stdio.h"
-#include "types.h"
+#include <common/stdio.h>
+#include <common/types.h>
+using namespace gros::common;
 
 uint8_t ballX = 1;
 uint8_t ballY = 4;
