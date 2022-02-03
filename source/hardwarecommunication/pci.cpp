@@ -60,9 +60,9 @@ bool PeripheralComponentInterconnectController::DeviceHasFunctions(common::uint1
 	return Read(bus, device, 0, 0x0E) & (1<<7);
 }
 
-void PeripheralComponentInterconnectController::SelectDrivers(gros::drivers::DriverManager* driverManager)
+void PeripheralComponentInterconnectController::SelectDrivers(DriverManager* driverManager)
 {
-	for(int bus = 0; bus < 0; bus++)
+	for(int bus = 0; bus < 8; bus++)
 	{
 		for(int device = 0; device < 32; device++)
 		{
