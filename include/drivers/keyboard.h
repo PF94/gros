@@ -26,7 +26,7 @@ namespace gros
 
 			KeyboardEventHandler* handler;
 		public:
-			KeyboardDriver(InterruptManager* manager, KeyboardEventHandler* handler);
+			KeyboardDriver(gros::hardwarecommunication::InterruptManager* manager, KeyboardEventHandler* handler);
 			~KeyboardDriver();
 			virtual gros::common::uint32_t HandleInterrupt(gros::common::uint32_t esp);
 			virtual void Activate();

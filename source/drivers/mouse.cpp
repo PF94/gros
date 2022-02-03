@@ -3,7 +3,7 @@
 
 using namespace gros::common;
 using namespace gros::drivers;
-using namespace myos::hardwarecommunication;
+using namespace gros::hardwarecommunication;
 
     MouseEventHandler::MouseEventHandler()
     {

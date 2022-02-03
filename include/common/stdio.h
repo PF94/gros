@@ -1,7 +1,7 @@
 #ifndef __STDIO_H
 #define __STDIO_H
 
-#include "types.h"
+#include <common/types.h>
 
 namespace gros
 {

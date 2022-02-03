@@ -1,5 +1,7 @@
 #include <hardwarecommunication/interrupts.h>
 #include <common/stdio.h>
+using namespace gros::common;
+using namespace gros::hardwarecommunication;
 
 InterruptHandler::InterruptHandler(InterruptManager* interruptManager, uint8_t InterruptNumber)
 {

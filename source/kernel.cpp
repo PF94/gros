@@ -1,11 +1,11 @@
-#include <grverp.h>
-#include <types.h>
+#include <common/grverp.h>
+#include <common/types.h>
+#include <common/stdio.h>
 #include <gdt.h>
-#include <interrupts.h>
-#include <driver.h>
-#include <keyboard.h>
-#include <mouse.h>
-#include <stdio.h>
+#include <hardwarecommunication/interrupts.h>
+#include <drivers/driver.h>
+#include <drivers/keyboard.h>
+#include <drivers/mouse.h>
 #include <bouncy_ball.h>
 
 using namespace gros;
