@@ -66,6 +66,11 @@ void printf(char* str) {
 	printf(str, 255, 255);
 }
 
+/**
+ * Prints a string of two hex numbers.
+ *
+ * @param key Interrupt number(?)
+ */
 void printfHex(uint8_t key)
 {
 	char* foo = "00";
@@ -74,6 +79,20 @@ void printfHex(uint8_t key)
 	foo[1] = hex[key & 0xF];
 	printf(foo);
 }
+
+/**
+ * Keyboard shit.
+ */
+class PrintfKeyboardEventHandler : public KeyboardEventHandler
+{
+public:
+	void OnKeyDown(char c)
+	{
+		char* foo = " ";
+		foo[0] = c;
+		printf(foo);
+	}
+};
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
@@ -111,7 +130,8 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		MouseDriver mouse(&interrupts);
 		drvManager.AddDriver(&mouse);
 
-		KeyboardDriver keyboard(&interrupts);
+	PrintfKeyboardEventHandler kbhandler;
+		KeyboardDriver keyboard(&interrupts, &kbhandler);
 		drvManager.AddDriver(&keyboard);
 
 	printf("Init hardware Stage 2\n");

@@ -171,11 +171,8 @@ uint32_t InterruptManager::DoHandleInterrupt(uint8_t interrupt, uint32_t esp)
 	}
 	else if(interrupt != hardwareInterruptOffset)
 	{
-		char* foo = "UNHANDLED INTERRUPT 0x00";
-		char* hex = "0123456789ABCDEF";
-		foo[22] = hex[(interrupt >> 4) & 0xF];
-		foo[23] = hex[interrupt & 0xF];
-		printf(foo);
+		char* foo = "UNHANDLED INTERRUPT 0x";
+		printfHex(interrupt);
 	}
 
 	// hardware interrupts must be acknowledged

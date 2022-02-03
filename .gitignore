@@ -29,3 +29,5 @@
 *.app
 *.iso
 *.bin
+
+Doxygen
