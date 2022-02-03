@@ -27,6 +27,7 @@ void bouncyBall() {
 	ballY =	ballY + ballYVel;
 
 	printf("O", ballX, ballY);
+	update_cursor(ballX,ballY);
 }
 
 }
