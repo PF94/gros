@@ -4,6 +4,12 @@
 
 	#include <common/types.h>
 
+/** @file port.h
+ *  @brief Header file for Hardware Ports
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 	namespace hardwarecommunication

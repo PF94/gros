@@ -8,6 +8,13 @@
 #include <drivers/mouse.h>
 #include <bouncy_ball.h>
 
+/** @file kernel.cpp
+ *  @brief GROS Kernel Code
+ *
+ *  @author Gamerappa
+ *  @author ROllerozxa
+ */
+
 using namespace gros;
 using namespace gros::common;
 using namespace gros::drivers;

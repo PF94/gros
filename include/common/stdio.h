@@ -3,6 +3,13 @@
 
 #include <common/types.h>
 
+/** @file stdio.h
+ *  @brief Header file for STDIO functions
+ *
+ *  @author Gamerappa
+ *  @author ROllerozxa
+ */
+
 namespace gros
 {
 

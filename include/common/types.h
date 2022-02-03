@@ -1,5 +1,12 @@
 #ifndef __GROS__COMMON__TYPES_H
 #define __GROS__COMMON__TYPES_H
+
+/** @file types.h
+ *  @brief Types header file
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 

@@ -6,6 +6,12 @@
 #include <common/types.h>
 #include <hardwarecommunication/port.h>
 
+/** @file interrupts.h
+ *  @brief Header file for Hardware Interruptions
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 	namespace hardwarecommunication

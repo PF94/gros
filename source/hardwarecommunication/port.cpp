@@ -3,6 +3,12 @@
 using namespace gros::common; // not using it for some reason????
 using namespace gros::hardwarecommunication;
 
+/** @file interrupts.cpp
+ *  @brief Hardware port code
+ *
+ *  @author Gamerappa
+ */
+
 Port::Port(gros::common::uint16_t portnumber)
 {
 	this->portnumber = portnumber;

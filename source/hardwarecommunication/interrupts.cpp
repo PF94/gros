@@ -1,5 +1,12 @@
 #include <hardwarecommunication/interrupts.h>
 #include <common/stdio.h>
+
+/** @file interrupts.cpp
+ *  @brief Hardware interrupts code
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros::common;
 using namespace gros::hardwarecommunication;
 

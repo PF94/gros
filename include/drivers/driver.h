@@ -1,6 +1,12 @@
 #ifndef __GROS__DRIVERS__DRIVER_H
 #define __GROS__DRIVERS__DRIVER_H
 
+/** @file driver.h
+ *  @brief Header file for drivers
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 	namespace drivers

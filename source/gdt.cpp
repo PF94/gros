@@ -1,4 +1,11 @@
 #include <gdt.h>
+
+/** @file gdt.cpp
+ *  @brief Global Descriptor Table code
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros;
 using namespace gros::common;
 

@@ -1,6 +1,12 @@
 #ifndef __GDT_H
 #define __GDT_H
 
+/** @file gdt.h
+ *  @brief Header file for the Global Descriptor Table
+ *
+ *  @author Gamerappa
+ */
+
 #include <common/types.h>
 namespace gros
 {

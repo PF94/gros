@@ -6,6 +6,12 @@
 #include <drivers/driver.h>
 #include <hardwarecommunication/interrupts.h>
 
+/** @file keyboard.h
+ *  @brief Header file for the Keyboard Driver
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 	namespace drivers

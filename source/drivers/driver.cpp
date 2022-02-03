@@ -1,5 +1,12 @@
 
 #include <drivers/driver.h>
+
+/** @file driver.cpp
+ *  @brief Driver code
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros::drivers;
 
 Driver::Driver()

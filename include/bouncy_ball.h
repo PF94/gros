@@ -1,6 +1,12 @@
 #ifndef __GROS__BOUNCY_BALL_H
 #define __GROS__BOUNCY_BALL_H
-// do i really have to do a namespace for this func -grkb, February 3 2022
+
+/** @file bouncy_ball.h
+ *  @brief Header file for the bouncy ball
+ *
+ *  @author ROllerozxa
+ */
+
 namespace gros
 {
 void bouncyBall();

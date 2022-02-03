@@ -1,6 +1,12 @@
 
 #include <drivers/mouse.h>
 
+/** @file mouse.cpp
+ *  @brief Mouse driver code
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros::common;
 using namespace gros::drivers;
 using namespace gros::hardwarecommunication;

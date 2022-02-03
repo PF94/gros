@@ -2,6 +2,12 @@
 #include <common/stdio.h>
 #include <bouncy_ball.h>
 
+/** @file keyboard.cpp
+ *  @brief Keyboard driver code
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros::common;
 using namespace gros::drivers;
 using namespace gros::hardwarecommunication;

@@ -1,5 +1,12 @@
 #include <common/stdio.h>
 #include <common/types.h>
+
+/** @file bouncy_ball.cpp
+ *  @brief Bouncy ball code
+ *
+ *  @author ROllerozxa
+ */
+
 using namespace gros::common;
 
 namespace gros {

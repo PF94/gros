@@ -6,6 +6,12 @@
 #include <drivers/driver.h>
 #include <hardwarecommunication/interrupts.h>
 
+/** @file mouse.h
+ *  @brief Header file for the Mouse Driver
+ *
+ *  @author Gamerappa
+ */
+
 namespace gros
 {
 	namespace drivers

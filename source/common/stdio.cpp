@@ -1,6 +1,12 @@
 #include <common/types.h>
 #include <common/stdio.h>
 
+/** @file stdio.cpp
+ *  @brief Yep... we have to do this...
+ *
+ *  @author Gamerappa
+ */
+
 using namespace gros;
 using namespace gros::common;
 
