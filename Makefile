@@ -41,7 +41,7 @@ mykernel.iso: mykernel.bin
 	echo '  multiboot /boot/mykernel.bin'    >> iso/boot/grub/grub.cfg
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
-	grub-mkrescue -o mykernel.iso iso --locale-directory= --themes=
+	grub-mkrescue  -o mykernel.iso iso --locale-directory= --themes=
 	rm -rf iso
 
 # the viktor tutorial was using vbox but it didn't work on my install
