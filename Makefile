@@ -12,7 +12,8 @@ objects = obj/loader.o \
           obj/drivers/keyboard.o \
           obj/drivers/mouse.o \
           obj/kernel.o \
-          obj/bouncyball.o
+          obj/bouncy_ball.o \
+          obj/common/stdio.o
 
 obj/%.o: source/%.cpp
 	mkdir -p $(@D)
