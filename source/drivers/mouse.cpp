@@ -1,5 +1,5 @@
-
 #include <drivers/mouse.h>
+#include <common/cpu.h>
 
 /** @file mouse.cpp
  *  @brief Mouse driver code

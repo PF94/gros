@@ -1,5 +1,6 @@
 #include <common/grverp.h>
 #include <common/types.h>
+#include <common/cpu.h>
 #include <common/stdio.h>
 #include <gdt.h>
 #include <hardwarecommunication/interrupts.h>
@@ -78,7 +79,7 @@ public:
 
 	virtual void OnMouseDown(uint8_t button)
 	{
-		update_cursor(x,y);
+		//update_cursor(x,y);
 	}
 };
 

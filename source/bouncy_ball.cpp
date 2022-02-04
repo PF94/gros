@@ -1,4 +1,5 @@
 #include <common/stdio.h>
+#include <common/cpu.h>
 #include <common/types.h>
 
 /** @file bouncy_ball.cpp
@@ -27,7 +28,7 @@ void bouncyBall() {
 	ballY =	ballY + ballYVel;
 
 	printf("O", ballX, ballY);
-	update_cursor(ballX,ballY);
+	//update_cursor(ballX,ballY);
 }
 
 }
