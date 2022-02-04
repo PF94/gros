@@ -1,7 +1,7 @@
 #ifndef __GROS__COMMON__CPU_H
 #define __GROS__COMMON__CPU_H
 
-/** @file grverp.h
+/** @file cpu.h
  *  @brief Header file for CPU functions
  *
  *  @author Gamerappa
