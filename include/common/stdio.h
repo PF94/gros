@@ -33,6 +33,7 @@ namespace gros
 	static inline void wrmsr(uint32_t msr_id, uint64_t msr_value);
 	static inline uint64_t rdmsr(uint32_t msr_id);
 	void update_cursor(int, int);
+	bool check_apic();
 	}
 }
 

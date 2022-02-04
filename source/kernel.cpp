@@ -76,6 +76,10 @@ public:
 							| (VideoMemory[80*y+x] & 0x00FF);
 	}
 
+	virtual void OnMouseDown(uint8_t button)
+	{
+		update_cursor(x,y);
+	}
 };
 
 typedef void (*constructor)();
@@ -105,9 +109,9 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 	printf(" (build ");
 	printf(buildNumber);
 	printf(")\n\n");
+	printf("CPU: ");
 	cpu_string();
-	printf("\n");
-	update_cursor(16,8); // this is a placeholder
+	printf("\n\n");
 
 	GlobalDescriptorTable gdt;
 	InterruptManager interrupts(0x20, &gdt);

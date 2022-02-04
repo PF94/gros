@@ -49,7 +49,7 @@ mykernel.iso: mykernel.bin
 # so imma use qemu instead of vbox
 run: mykernel.iso
 	(killall qemu-i386 && sleep 1) || true
-	qemu-system-x86_64 -drive format=raw,file=mykernel.iso -m 512m
+	qemu-system-x86_64 -drive format=raw,file=mykernel.iso -m 512m -cpu core2duo -serial stdio -serial file:CON
 
 
 .PHONY: clean
