@@ -24,15 +24,57 @@ VideoGraphicsArray::~VideoGraphicsArray()
 
 void VideoGraphicsArray::WriteRegisters(uint8_t* registers)
 {
+	//  misc
+	miscPort.Write(*(registers++));
+
+	// sequencer
+	for(uint8_t i = 0; i < 5; i++)
+	{
+		sequencerIndexPort.Write(i);
+		sequencerDataPort.Write(*(registers++));
+	}
+
+	// cathode ray tube controller
+	crtcIndexPort.Write(0x03);
+	crtcDataPort.Write(crtcDataPort.Read() | 0x80);
+	crtcIndexPort.Write(0x11);
+	crtcDataPort.Write(crtcDataPort.Read() & ~0x80);
+
+	registers[0x03] = registers[0x03] | 0x80;
+	registers[0x11] = registers[0x11] & ~0x80;
+
+	for(uint8_t i = 0; i < 25; i++)
+	{
+		crtcIndexPort.Write(i);
+		crtcDataPort.Write(*(registers++));
+	}
+
+	// graphics controller
+	for(uint8_t i = 0; i < 9; i++)
+	{
+		graphicsControllerIndexPort.Write(i);
+		graphicsControllerDataPort.Write(*(registers++));
+	}
+
+	// attribute controller
+	for(uint8_t i = 0; i < 21; i++)
+	{
+		attributeControllerResetPort.Read();
+		attributeControllerIndexPort.Write(i);
+		attributeControllerWritePort.Write(*(registers++));
+	}
+
+	attributeControllerResetPort.Read();
+	attributeControllerIndexPort.Write(0x20);
 }
 
 
-bool VideoGraphicsArray::SupportsMode(common::uint32_t width, common::uint32_t height, common::uint32_t colordepth)
+bool VideoGraphicsArray::SupportsMode(uint32_t width, uint32_t height, uint32_t colordepth)
 {
 	return width == 320 && height == 200 && colordepth == 8;
 }
 
-bool VideoGraphicsArray::SetMode(common::uint32_t width, common::uint32_t height, common::uint32_t colordepth)
+bool VideoGraphicsArray::SetMode(uint32_t width, uint32_t height, uint32_t colordepth)
 {
 	if(!SupportsMode(width, height, colordepth))
 		return false;
@@ -63,16 +105,32 @@ bool VideoGraphicsArray::SetMode(common::uint32_t width, common::uint32_t height
 
 uint8_t* VideoGraphicsArray::GetFrameBufferSegment()
 {
+	graphicsControllerIndexPort.Write(0x06);
+	uint8_t segmentNumber = graphicsControllerDataPort.Read() & (3<<2);
+	switch(segmentNumber)
+	{
+		default:
+		case 0<<2: return (uint8_t*)0x00000;
+		case 1<<2: return (uint8_t*)0xA0000;
+		case 2<<2: return (uint8_t*)0xB0000;
+		case 3<<2: return (uint8_t*)0xB8000;
+	}
 }
 
-void VideoGraphicsArray::PutPixel(common::uint32_t x, common::uint32_t y,  common::uint8_t r, common::uint8_t g, common::uint8_t b)
+void VideoGraphicsArray::PutPixel(uint32_t x, uint32_t y,  uint8_t colorIndex)
 {
+	uint8_t* pixelAddress = GetFrameBufferSegment() + 320*y + x;
+	*pixelAddress = colorIndex;
 }
 
-uint8_t VideoGraphicsArray::GetColorIndex(common::uint8_t r, common::uint8_t g, common::uint8_t b)
+uint8_t VideoGraphicsArray::GetColorIndex(uint8_t r, uint8_t g, uint8_t b)
 {
+	if(r == 0x00, g == 0x00, b == 0xA8)
+		return 0x01;
+	return 0x00;
 }
 
-void VideoGraphicsArray::PutPixel(common::uint32_t x, common::uint32_t y, common::uint8_t colorIndex)
+void VideoGraphicsArray::PutPixel(uint32_t x, uint32_t y,  uint8_t r, uint8_t g, uint8_t b)
 {
+	PutPixel(x,y, GetColorIndex(r,g,b));
 }
