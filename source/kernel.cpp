@@ -9,7 +9,10 @@
 #include <drivers/keyboard.h>
 #include <drivers/mouse.h>
 #include <drivers/vga.h>
+#include <gui/desktop.h>
 #include <bouncy_ball.h>
+
+#define GRAPHICSMODE
 
 /** @file kernel.cpp
  *  @brief GROS Kernel Code
@@ -22,6 +25,7 @@ using namespace gros;
 using namespace gros::common;
 using namespace gros::drivers;
 using namespace gros::hardwarecommunication;
+using namespace gros::gui;
 
 /**
 * Keyboard shit.
@@ -112,13 +116,26 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 	InterruptManager interrupts(0x20, &gdt);
 
 	printf("Init hardware Stage 1\n");
+
+    #ifdef GRAPHICSMODE
+        Desktop desktop(320,200, 0x00,0x00,0xA8);
+    #endif
+
 	DriverManager drvManager;
-		MouseToConsole mousehandler;
-		MouseDriver mouse(&interrupts, &mousehandler);
+        #ifdef GRAPHICSMODE
+            MouseDriver mouse(&interrupts, &desktop);
+        #else
+            MouseToConsole mousehandler;
+            MouseDriver mouse(&interrupts, &mousehandler);
+        #endif
 		drvManager.AddDriver(&mouse);
 
-	PrintfKeyboardEventHandler kbhandler;
-		KeyboardDriver keyboard(&interrupts, &kbhandler);
+        #ifdef GRAPHICSMODE
+            KeyboardDriver keyboard(&interrupts, &desktop);
+        #else
+            PrintfKeyboardEventHandler kbhandler;
+            KeyboardDriver keyboard(&interrupts, &kbhandler);
+        #endif
 		drvManager.AddDriver(&keyboard);
 
 		PeripheralComponentInterconnectController PCIController;
@@ -130,10 +147,17 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t /*multiboot_magic
 		drvManager.ActivateAll();
 
 	printf("Init hardware Stage 3\n");
+
+    #ifdef GRAPHICSMODE
+        vga.SetMode(320,200,8);
+    #endif
+
 	interrupts.Activate();
 
-	vga.SetMode(320,200,8);
-	vga.FillRectangle(0,0,320,200,0x00,0x00,0xA8);
-
-	while(1);
+	while(1)
+    {
+        #ifdef GRAPHICSMODE
+            desktop.Draw(&vga);
+        #endif
+    }
 }

@@ -2,48 +2,48 @@
 #include <common/cpu.h>
 
 /** @file mouse.cpp
- *  @brief Mouse driver code
- *
- *  @author Gamerappa
- */
+*  @brief Mouse driver code
+*
+*  @author Gamerappa
+*/
 
 using namespace gros::common;
 using namespace gros::drivers;
 using namespace gros::hardwarecommunication;
 
-    MouseEventHandler::MouseEventHandler()
-    {
-    }
+	MouseEventHandler::MouseEventHandler()
+	{
+	}
 
-    void MouseEventHandler::OnActivate()
-    {
-    }
+	void MouseEventHandler::OnActivate()
+	{
+	}
 
-    void MouseEventHandler::OnMouseDown(uint8_t button)
-    {
-    }
+	void MouseEventHandler::OnMouseDown(uint8_t button)
+	{
+	}
 
-    void MouseEventHandler::OnMouseUp(uint8_t button)
-    {
-    }
+	void MouseEventHandler::OnMouseUp(uint8_t button)
+	{
+	}
 
-    void MouseEventHandler::OnMouseMove(int x, int y)
-    {
-    }
+	void MouseEventHandler::OnMouseMove(int x, int y)
+	{
+	}
 
-    MouseDriver::MouseDriver(InterruptManager* manager, MouseEventHandler* handler)
-    : InterruptHandler(manager, 0x2C),
-    dataport(0x60),
-    commandport(0x64)
-    {
+	MouseDriver::MouseDriver(InterruptManager* manager, MouseEventHandler* handler)
+	: InterruptHandler(manager, 0x2C),
+	dataport(0x60),
+	commandport(0x64)
+	{
 		this->handler = handler;
-    }
+	}
 
-    MouseDriver::~MouseDriver()
-    {
-    }
+	MouseDriver::~MouseDriver()
+	{
+	}
 
-    void MouseDriver::Activate()
+	void MouseDriver::Activate()
 	{
 		offset = 0;
 		buttons = 0;
@@ -59,33 +59,33 @@ using namespace gros::hardwarecommunication;
 		dataport.Write(0xF4);
 	}
 
-    uint32_t MouseDriver::HandleInterrupt(uint32_t esp)
-    {
-        uint8_t status = commandport.Read();
-        if (!(status & 0x20))
-            return esp;
+	uint32_t MouseDriver::HandleInterrupt(uint32_t esp)
+	{
+		uint8_t status = commandport.Read();
+		if (!(status & 0x20))
+			return esp;
 
-        buffer[offset] = dataport.Read();
-        offset = (offset + 1) % 3;
+		buffer[offset] = dataport.Read();
+		offset = (offset + 1) % 3;
 
-        if(offset == 0)
-        {
-            if(buffer[1] != 0 || buffer[2] != 0)
-            {
-				handler->OnMouseMove(buffer[1], -buffer[2]);
-            }
+		if(offset == 0)
+		{
+			if(buffer[1] != 0 || buffer[2] != 0)
+			{
+				handler->OnMouseMove((int8_t)buffer[1], -((int8_t)buffer[2]));
+			}
 
-            for(uint8_t i = 0; i < 3; i++)
-            {
-                if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
-                {
-                    if(buttons & (0x1<<i))
-                        handler->OnMouseUp(i+1);
-                    else
-                        handler->OnMouseDown(i+1);
-                }
-            }
-            buttons = buffer[0];
-        }
-        return esp;
-    }
+			for(uint8_t i = 0; i < 3; i++)
+			{
+				if((buffer[0] & (0x1<<i)) != (buttons & (0x1<<i)))
+				{
+					if(buttons & (0x1<<i))
+						handler->OnMouseUp(i+1);
+					else
+						handler->OnMouseDown(i+1);
+				}
+			}
+			buttons = buffer[0];
+		}
+		return esp;
+	}
