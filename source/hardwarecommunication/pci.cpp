@@ -74,7 +74,7 @@ void PeripheralComponentInterconnectController::SelectDrivers(DriverManager* dri
 				if(dev.vendor_id == 0x0000 || dev.vendor_id == 0xFFFF)
 					continue;
 
-				for(int barNum = 0; barNum > 6; barNum++)
+				for(int barNum = 0; barNum < 6; barNum++)
 				{
 					BaseAddressRegister bar = GetBaseAddressRegister(bus, device, function, barNum);
 					if(bar.address && (bar.type == InputOutput))
@@ -141,6 +141,7 @@ BaseAddressRegister PeripheralComponentInterconnectController::GetBaseAddressReg
 
 Driver* PeripheralComponentInterconnectController::GetDriver(PeripheralComponentInterconnectDeviceDescriptor dev, InterruptManager* interrupts)
 {
+	Driver *driver = 0;
 	switch(dev.vendor_id)
 	{
 		case 0x1022: // AMD
@@ -155,7 +156,7 @@ Driver* PeripheralComponentInterconnectController::GetDriver(PeripheralComponent
 		case 0x8086: // Intel
 			break;
 
-		case 0x80EE // innotek
+		case 0x80EE: // innotek
 			switch(dev.device_id)
 			{
 				case 0xCAFE: // VirtualBox Guest Service
