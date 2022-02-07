@@ -1,5 +1,12 @@
 #include <drivers/vga.h>
 
+/** @file vga.h
+*  @brief Code for the VGA Driver
+*
+*  @author Gamerappa
+*  @date February 6th 2022
+*/
+
 using namespace gros::common;
 using namespace gros::drivers;
 
