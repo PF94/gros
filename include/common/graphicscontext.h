@@ -15,7 +15,7 @@ namespace gros
 {
     namespace common
     {
-        typedef GraphicsContext VideoGraphicsArray;
+        typedef gros::drivers::VideoGraphicsArray GraphicsContext;
     }
 }
 
