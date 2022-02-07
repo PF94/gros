@@ -16,6 +16,21 @@ namespace gros
 {
 	namespace hardwarecommunication
 	{
+		enum BaseAddressRegisterType
+		{
+			MemoryMapping = 0,
+			InputOutput = 1
+		};
+
+		class BaseAddressRegister
+		{
+		public:
+			bool prefetchable;
+			gros::common::uint8_t* address;
+			gros::common::uint32_t size;
+			BaseAddressRegisterType type;
+		};
+
 		class PeripheralComponentInterconnectDeviceDescriptor
 		{
 		public:
@@ -53,8 +68,10 @@ namespace gros
 			void Write(common::uint16_t bus, common::uint16_t device, common::uint16_t function, common::uint32_t registeroffset, common::uint32_t value);
 			bool DeviceHasFunctions(common::uint16_t bus, common::uint16_t device);
 
-			void SelectDrivers(gros::drivers::DriverManager* driverManager);
+			void SelectDrivers(gros::drivers::DriverManager* driverManager, gros::hardwarecommunication::InterruptManager* interrupts);
+			gros::drivers::Driver* GetDriver(PeripheralComponentInterconnectDeviceDescriptor dev, gros::hardwarecommunication::InterruptManager* interrupts);
 			PeripheralComponentInterconnectDeviceDescriptor GetDeviceDescriptor(gros::common::uint16_t bus, gros::common::uint16_t device, gros::common::uint16_t function);
+			BaseAddressRegister GetBaseAddressRegister(common::uint16_t bus, common::uint16_t device, common::uint16_t function, common::uint16_t bar);
 		};
 	}
 }
